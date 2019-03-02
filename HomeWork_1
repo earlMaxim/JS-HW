@@ -1,0 +1,81 @@
+
+// Получить первую и последнюю буквы строки
+
+let str = "some test string";
+str.length; // 16
+alert(str.charAt(0));
+alert(str.charAt(15));
+
+// Сделать первую и последнюю буквы в верхнем регистре
+
+let str = "some test string";
+str.length; // 16
+str = str.charAt(0).toUpperCase() + str.slice(1);
+str = str.substring(0, 15) + str.charAt(15).toUpperCase();
+
+
+// Найти положение слова ‘string’ в строке
+
+let str = "some test string";
+str.indexOf("string");
+
+// Найти положение второго пробела (“вручную” ничего не считать)
+
+let str = "some test string";
+str.indexOf(" ");	// 4 -- находим индекс первого пробела
+str.indexOf(" ", 5);	// 9
+
+// Получить строку с 5-го символа длиной 4 буквы
+
+let str = "some test string";
+str.substr(5, 4); //test
+
+// Получить строку с 5-го по 9-й символы
+
+let str = "some test string";
+str.substring(5,10); // по 9ый включительно
+
+// Получить новую строку из исходной путем удаления последних 6-и символов (то есть исходная строка без последних 6и символов)
+
+let str = "some test string";
+str = str.slice(0, -6);
+
+
+// Из двух переменных a=20 и b=16 получить переменную string, в которой будет содержаться текст “2016”
+
+let a=20, b=16;
+a = a.toString();
+b = b.toString();
+let str = a + b;
+
+------------------------------------------------------------------------
+
+//Получить число pi из Math и округлить его до 2-х знаков после точки
+
+let pi = Math.PI;
+pi = pi.toFixed(2);
+
+// Используя Math, найти максимальное и минимальное числа из представленного ряда 15, 11, 16, 12, 51, 12, 13, 51
+
+let max = Math.max(15, 11, 16, 12, 51, 12, 13, 51);
+let min = Math.min(15, 11, 16, 12, 51, 12, 13, 51);
+
+// Работа с Math.random:
+// a
+let rnd = Math.random();
+rnd = rnd.toFixed(2);
+
+//b
+let rnd = Math.random() * (13 - 0);
+rnd = Math.round(rnd);
+
+// Проверить результат вычисления 0.6 + 0.7 - как привести к нормальному виду (1.3)?
+
+0.6 + 0.7 == 1.3  // false
+let x = 0.6 + 0.7 // 1.299999
+x = (Math.round(x*10))/10;
+
+// Получить число из строки ‘100$’
+
+let str = "100$";
+str = parseInt(str);
