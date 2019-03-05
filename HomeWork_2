@@ -1,0 +1,101 @@
+
+let a = 0 || 'string' // "string" // Преобразование 0 в bool, этот bool вернул false - поэтому выводим правое значение. 
+
+let a = 1 && 'string' // "string" // Первый операнд преобразовывается в bool, если true, то выводим правое значение. 
+
+let a = null || 25; // 25 так как первый операнд false
+
+let a = null && 25; // null так как первый операнд true
+
+let a = null || 0 || 35; // 35 так как сравнение идет справа налево, а null и 35 вернули false
+
+let a = null && 0 && 35; // null ибо при false в операции && возвращается правое значение
+
+
+12 + 14 + '12' // "2612" когда перед строкой стоит + , то интерпретатор считает это конкатенация строк, а два левых операнда сложились
+
+3 + 2 - '1' // 4 JS преобразовывает строку к числам, если перед ней не +
+
+'3' + 2 - 1 // 31 Сперва происходит конкастенация из-за +, а потом преобразование к числу. 
+
+true + 2 // 3 true==1
+
++'10' + 1 // 11 Если стоит + перед строкой вначале, то это явно преобразование к int
+
+undefined + 2 // NaN JS не может приравнять undefined к числу
+
+null + 5 // 5 null==0
+
+true + undefined // NaN undefined не работает адекватно, как число. 
+
+
+//Если переменная равна “hidden”, присвоить ей значение “visible”, иначе - “hidden”.
+let x = "Test";
+if (x == "hidden"){
+	x = "visible";
+}
+else{
+	x="hidden";
+}
+
+//Используя if, записать условие: если переменная равна нулю, присвоить ей 1;
+//если меньше нуля - строку “less then zero”;
+//если больше нуля - используя оператор “присвоение”, переменную умножить на 10 
+//(использовать краткую запись).
+
+var x ;
+if (x == 0){
+    x=1;
+}
+else if (x < 0){
+    x="less than zero";
+}
+else if (x > 0){
+    x*=10;
+}
+else {
+    alert("X is wrong");
+}
+
+//Дан объект let car ...
+
+var car = { name: 'Lexus', age: 10, create: 2008, needRepair: false };
+if (car.age > 5){
+    console.log("Need Repair");
+    car.needRepair = true;
+}
+else{   
+    car.needRepair = false;
+}
+
+
+//
+//Программа работает корректно, если полностью удалить значение и само поле discount. Но если я оставлю discount: '%', то выводит NaN из console.log(item.priceWithDiscount). Я не могу понять почему, ведь в условиях if сказано item.discount != NaN. 
+var item = { name: 'Intel core i7', price: '100$', discount: '15%'};
+var Discount = parseInt(item.discount);
+var Price = parseInt(item.price);
+if (item.discount != undefined && item.discount != NaN){
+    item.priceWithDiscount = Price - Price*Discount/100;
+    console.log(item.priceWithDiscount);
+}
+if (item.discount == undefined || item.discount == NaN){
+    console.log(item.price);
+}
+
+
+//
+
+let product = {
+    name: "Яблоко",
+    price: "10$"
+};
+let min = 10; // минимальная цена
+let max = 20; // максимальная цена
+let iprice = parseInt(product.price);
+if (iprice >= min && iprice<=max){
+console.log(product.name);
+}
+else{
+    console.log("Товаров не найдено");
+}
+
