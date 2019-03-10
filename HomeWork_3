@@ -1,0 +1,97 @@
+
+//Записать в виде switch case следующее условие:
+
+    var a = prompt ("Input a", "test");
+    switch (a){
+        case 'block':{
+        console.log("block");
+        break;}
+        case 'none':{
+        console.log("none");
+        break;}
+        case 'inline':{
+        console.log("other");
+        break;}
+    }
+
+//задачи 1, 2 и 3 в виде тернарного оператора.
+
+var a= prompt("Input a","test");
+a==="hidden"?a="visible":a="hidden";
+
+var a = prompt("Input a", 0);
+a == 0?a=1:a<0?a="less then zero":a*=10;
+console.log(a);
+
+var car = { name: 'Lexus', age: 10, create: 2008, needRepair: false };
+car.age>5?car.needRepair=true && console.log("Car need repair"):car.needRepair=false;
+
+
+
+//1
+var str = "i am in the easycode";
+var l = str.length;
+var newStr = "";
+for (var i = 0; i<l; i++){
+    if (str[i-1]==" " || str[i-1]==undefined){
+        newStr = newStr.slice(0, i) + str[i].toUpperCase() + str.slice(i+1,l);
+    }
+}
+console.log(newStr);
+
+
+//2
+var str = "tseb eht ma i";
+var newStr="";
+var l = str.length;
+for (var i = 0; i<l; i++){
+    newStr= str[i] + newStr;
+}
+console.log(newStr);
+
+
+//3. Факториал числа
+
+var res = 1;
+for (var i=1; i<11; i++){
+    res= res * i ;
+}
+console.log(res);
+
+//4
+var str = "JavaScript is a pretty good language";
+var l = str.length;
+var newStr = "";
+for (var i = 0; i<l; i++){
+    if (str[i-1]==" " || str[i-1]==undefined){
+        newStr = newStr.slice(0, i) + str[i].toUpperCase() + str.slice(i+1,l);
+    }
+}
+for (var i = 0; i<l; i++){
+    if(newStr[i]==" "){
+        newStr=newStr.slice(0, i) + newStr.slice(i+1, l)
+    }
+}
+console.log(newStr);
+
+
+//5
+var array =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+for (var value of array){
+    if(value % 2 != 0){
+        console.log(value);
+    }
+}
+
+//6
+let list = {
+    name: 'denis',
+    work: 'easycode',
+    age: 29
+}
+ for (var item in list){
+     if( typeof(list[item])=="string"){
+         console.log(list[item].toUpperCase());
+     }
+ }
+
