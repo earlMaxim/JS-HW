@@ -1,0 +1,135 @@
+//1
+
+multiply(1, 2, 3)
+
+function multiply(){
+    let l= arguments.length, res=1;
+    if (l==0){
+        console.log("0")
+        return 0;
+    }
+    else{
+        for(var i=0; i<l;i++){
+            res*=arguments[i];
+        }
+        console.log(res);
+    }
+}
+
+//2
+
+let str = prompt("Input str", "test");
+reverseString(str);
+
+function reverseString(string){
+    let array = string.split("");
+    let newArray = [], e;
+    for (let i = array.length; i>=0; i--){
+       e = array.length - i;
+       newArray[e] = array[i];
+    }
+console.log(newArray = newArray.join(""));
+}
+
+//3
+
+let str = prompt("Input str", "test");
+getCodeStringFromText(str);
+
+function getCodeStringFromText (str){
+    let newArray= [];
+    for (let i = 0; i < str.length; i++){
+        newArray[i] = str.charCodeAt(i);
+    }
+    console.log(str = newArray.join(" "));
+}
+
+//4 
+
+let n = prompt("Input n");
+let rnd = random(n);
+check (n, rnd);
+
+function random(n){
+    if(n>=0 && n<=10){
+        let rnd = Math.round(Math.random()*10);
+    }
+    else{
+        console.log("Число должно быть от 0 до 10");
+    }
+    return rnd;
+}
+function check (n , rnd){
+    if(n==rnd){
+        console.log("Вы выиграли")
+    }
+    else{
+        console.log("Вы не угадали ваше число " + n +" а выпало число " + rnd);
+    }
+}
+
+
+//5 
+
+let n = prompt("Input n", 1);
+let array = [];
+toArray(n);
+
+function toArray (size) {
+for (let i = 1; i<=size; i++){
+    array[i] = i;
+    }
+console.log(array);
+} 
+
+//6
+
+doubleArray(1, 2, 3)
+
+function doubleArray(...rest){
+    let array=[];
+    l = rest.length;
+    for(let i =0; i<l;i++){
+        rest[l+i]=rest[i];
+    }
+    console.log(rest);
+}
+
+//7
+
+changeCollection([1, 2, 3],[1,2])
+
+function changeCollection(...collection){
+    let l = collection.length;
+    let tempArray = [];
+    for(let i =0; i<l; i++){
+        tempArray = collection[i]
+        tempArray = tempArray.shift();
+    }
+    console.log(collection);
+}
+
+//8
+
+funcGetUsers({name: 'Denis', age: '29', gender: 'male'} , {name: 'Ivan', age: '20', gender: 'male'}, "gender", "male"); 
+
+function funcGetUsers(users, gender, male){
+    let l = arguments.length;
+    let arrayUsers = [];
+    console.log(arguments[3]);
+    if(l<=2){
+        console.log ("Передано мало параметров");
+    }
+    else{  
+        let IndexMale = l-1; 
+        let IndexGender = l-2;
+        for(let i=0; i<l-2; i++){
+            let user = arguments[i];
+            if(user.gender == "male" && user.gender != undefined){
+                arrayUsers = arrayUsers.concat(arguments[i]);
+            } 
+        }
+        console.log(arrayUsers);
+    }
+}
+
