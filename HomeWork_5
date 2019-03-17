@@ -1,0 +1,160 @@
+
+//1
+
+firstFunc(['my', 'name', 'is', 'Trinity'], handler1)
+firstFunc([10, 20, 30], handler2) 
+firstFunc([{age: 45, name: 'Jhon'}, {age: 20, name: 'Aaron'}], handler3)
+firstFunc(['abc', '123'], handler4) 
+
+function firstFunc(array, callbcak){
+    let secondF = callbcak(array);
+    console.log("New value: " + secondF);
+}
+
+function handler1(array){
+    var CapitelLetter = array.map(function(item){
+        return (item[0].toUpperCase() + item.toLowerCase().slice(1));
+    })
+    return CapitelLetter.join("")
+}
+function handler2(array){
+    return array.map(function(item){
+        return item*10 +" ";
+    })
+}
+function handler3(array){
+    return array.reduce(function(previous, item){
+        return previous+=item.name + " is " + item.age +" ";
+    },"")
+}
+function handler4(array){
+    return array.reduce(function(previous, item){
+        return previous += item.split("").reverse().join("") + ", ";
+    },"")
+}
+
+//2 Написать аналог метода every. 
+
+let array = [10, 20, 30, 13, 4];
+customEvery(array, checkEveryNumber)
+
+function customEvery(array, callback){
+    var isArr = Array.isArray(array);
+    if (isArr == true){
+        var result = callback(array);
+        if (result == true){
+            console.log("true")
+        }
+        if (result == false){
+            console.log("false")
+        } 
+    }
+    else{
+        console.log("Isnt array");
+    }
+}
+function checkEveryNumber(array){
+        var totalTrue = array.length;
+        for(var i = 0; i< array.length; i++){
+            if(array[i]<5){
+                totalTrue--;
+            }
+        }
+        if(totalTrue == array.length){
+            return true;
+        }
+        else{
+            return false;
+        }
+}
+
+
+//1 сформировать новый массив,
+каждый элемент которого будет хранить информацию о числе и его четности:
+
+
+var a = [1,2,3,5,8,9,10];
+var c = []; 
+
+a.forEach(function(item){
+    var b;
+    if(item%2==0){
+        b=true;
+    }
+    else {b=false}
+ c.push(("Digit: " + item + " odd: " + b));
+});
+console.log(c)
+
+//2 Проверить, содержит ли массив элементы, равные нулю. Если да - вернуть false.
+
+[12, 4, 50, 1, 18, 0, 40].every(function(element){ return element != 0});
+
+//3 Проверить, содержит ли массив хотя бы одно слово длиной больше 3х букв
+
+['yes', 'hello', 'no', 'easycode', 'what'].some(function(element){return element.length>3})
+
+//4 Напишите функцию, которая из элементов массива соберет и вернёт
+строку, основываясь на index каждой буквы
+
+
+let a = [{char:"a",index:12}, {char:"w",index:8}, {char:"Y",index:10}, {char:"p",index:3}, {char:"p",index:2},
+{char:"N",index:6}, {char:" ",index:5}, {char:"y",index:4}, {char:"r",index:13}, {char:"H",index:0},
+{char:"e",index:11}, {char:"a",index:1}, {char:" ",index:9}, {char:"!",index:14}, {char:"e",index:7}];
+
+let b= "";
+SortedArray(a, MakeSentence)
+
+function SortedArray(array, callback){
+    array = array.sort(function(a, b){
+       return a.index > b.index;
+    })
+    console.log(array);
+    callback(array);
+}
+function MakeSentence(array){
+    b = array.reduce(function(acc, item){
+       return acc+=item.char;
+    },"");
+}
+console.log(b);
+
+
+
+//1 Отсортируйте массив массивов так, чтобы вначале располагались наименьшие массивы 
+
+let array = [  [14, 45],  [1],  ['a', 'c', 'd']  ] ;
+array.sort();
+
+//2 Отсортировать их по возрастающему количеству ядер (cores).
+
+let array = [
+    {cpu: 'intel', info: {cores:2, сache: 3}},
+    {cpu: 'intel', info: {cores:4, сache: 4}},
+    {cpu: 'amd', info: {cores:1, сache: 1}},
+    {cpu: 'intel', info: {cores:3, сache: 2}},
+    {cpu: 'amd', info: {cores:4, сache: 2}}	
+];
+
+array.sort(function(a, b){
+    return a.info.cores - b.info.cores
+});
+
+//3 Функция должна вернуть все продукты, цена которых находится в указанном диапазоне, и сортировать от дешевых к дорогим:
+
+
+let products = [
+    {title: 'prod1', price: 5.2}, {title: 'prod2', price: 0.18},
+    {title: 'prod3', price: 15}, {title: 'prod4', price: 25},
+    {title: 'prod5', price: 18.9}, {title: 'prod6', price: 8},
+    {title: 'prod7', price: 19}, {title: 'prod8', price: 63}
+];
+
+filterCollection(products, 15, 30);
+
+function filterCollection(products, min, max){
+    let filtredProducts = products.filter(function(products){
+        return products.price>min && products.price<max;
+    }).sort(function(a, b){return a.price - b.price})
+    console.log(filtredProducts);
+}
