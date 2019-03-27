@@ -1,85 +1,153 @@
-/**
- * TODOS
- * 1. Добавление задачи
- * 2. Удаление задачи
- * 3. Редактирование задачи
- */
+// Task manager
+// 1. создать задачу
+//      а. обработка формы
+//          - проверить данные перед добавлением (валидация)
+//      б. добавить задачу в массив
+//      в. добавить данные в таблицу
+//      г. офистить форму
+// 2. удалить задачу
+//      а. подтверждение
+//      б. удаление данных из таблицы
+//      в. удаление данных из массива 
+// 3. редактировать задачу 
+//      а. взять данные из массива
+//      б. поместить в форму 
+//      в. обработать форму на редактирование
+//          - валидация
+//      г. обновить данные в массиве
+//      д. обновить данные в таблице
+//      е. офистить форму
 
-/**
- * Одна задача это объект из следующих полей
- * id - произвольная уникальная строка
- * title - заголовок задачи
- * text - текст задачи
- */
+// task = {
+//     id: {
+//         type: 'String',
+//         required: true
+//     },
+//     title: {
+//         type: 'String',
+//         required: true
+//     },
+//     text: {
+//         type: 'String',
+//         required: true
+//     }
+// }
 
-let storage = {
-    current_todos: [],
-    deleted_todos: []
-};
+;(function () {
+    
+    let storage = {
+        todos: []
+    };
 
-/**
- * generate_id - создает произвольную строку 
- * @returns {string} - новый id
- */
-const generate_id = () => {
-    const words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-   
-    let id = "";
+    /**
+     * 
+     */
+    function generateId() {
+        // const words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        // let id = '';
 
-    for (let i = 0; i < 10; i++) {
-        let index = Math.floor(Math.random() * words.length);
-        id += words[index]; 
+        // for (let char of words) {
+        //     let index = Math.floor(Math.random() * words.length);
+        //     id += words[index];
+        // }
+        const id = `f${(~~(Math.random()*1e8)).toString(16)}`;
+        return id;
     }
-    return id;
-  
-}
 
-/**
- * add_new_todo - функция для добавления новой задачи
- * @param {String} title - заголовок задачи 
- * @param {String} text - текст задачи
- * @returns {void}
- */
-const add_new_todo = (title, text) => {
-    if (!title) return console.log("Введите заголовок задачи.");
-    if (!text) return console.log("Введите текст задачи.");
+    /**
+     * 
+     * @param {*} title 
+     * @param {*} text 
+     */
+    function addNewTodoToStorage(title, text) {
+        if (!title) return console.log('Введите заголовок задачи');
+        if (!text) return console.log('Введите текст задачи');
 
-    const new_todo = { title, text, id: generate_id() };
+        const newTask = {
+            title,
+            text, 
+            id: generateId()
+        };
 
-    storage.current_todos.push(new_todo);
+        storage.todos.push(newTask);
+        
+        return storage.todos;
+    }
 
-    return storage.current_todos;
-}
+    addNewTodoToStorage('My title 1', 'My text 1');
+    addNewTodoToStorage('My title 2', 'My text 2');
+    addNewTodoToStorage('My title 3', 'My text 3');
+    addNewTodoToStorage('My title 4', 'My text 4');
+    console.log(storage)
+    /**
+     * 
+     * @param {*} id 
+     */
+    function deleteTodoFromStorage(id) {
+        if (!id) return console.log('Передайте id задачи');
 
-/**
- * delete_todo_item - удаление одной задачи
- * @param {sting} id 
- */
-const delete_todo_item = id => {
-    if (!id) return console.log("Передайте id удаляемой задачи.");
+        const checkId = storage.todos.some(function(task, i) { 
+            return task.id === id 
+        });
+        if (!checkId) return console.log('id несуществуе');
 
-    storage.current_todos = storage.current_todos.filter(todo => todo.id !== id);
+        let removedTask;
 
-    return storage.current_todos;
-}
-
-/**
- * 
- * @param {*} id 
- * @param {*} title 
- * @param {*} text 
- */
-const edit_todo_item = (id, title, text) => {
-    if (!id) return console.log("Введите id");
-    storage.current_todos.forEach(function(item){
-        if(item.id == id){
-            item.title = title;
-            item.text = text;
+        for (let i = 0; i < storage.todos.length; i++) {
+            if (storage.todos[i].id === id) {
+                removedTask = storage.todos.splice(i, 1);
+                break;
+            }
         }
-    })
-}
+        
+        return removedTask;
+    }
 
-add_new_todo("tese", "test")
+    /**
+     * 
+     * @param {*} id 
+     * @param {*} title 
+     * @param {*} text 
+     */
+    function editTaskStorage(id, title, text) {
 
-edit_todo_item("","","")
-console.log(storage);
+        if(!id) console.log('Пердай ID');
+        //создаю массив всех Id
+        let allId = storage.todos.map(item => item.id);
+        let check =false;
+        //проверяю наличие такого id
+        let check = allId.forEach(function(item){
+            if(item == id){
+                return true;
+            }
+        })
+        if(check==true){
+            //elfkz. cnfhe. pfgbcm
+            for (let i = 0; i < storage.todos.length; i++) {
+                if (storage.todos[i].id === id) {
+                    storage.todos.splice(i, 1);
+                    break;
+                }
+            }
+            //создаю новую = редактирую
+            const editTask = {
+                title,
+                text, 
+                id 
+            };
+            //вставлюю ее в общий список
+            storage.todos.push(editTask);
+        }
+        // const allwithout = storage.todos.filter(todos => todos.id=!id)
+
+        // const changetodo = {
+        //     title,
+        //     text,
+        //     id
+        // }
+
+        // allwithout.push(changetodo);
+        // storage.todos = allwithout;
+    }
+
+})();
